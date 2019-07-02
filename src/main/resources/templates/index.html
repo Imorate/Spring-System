@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--suppress CheckImageSize -->
+<html dir="rtl" lang="fa" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>سامانه اسپرینگ | صفحه اصلی</title>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" title="IE=edge,chrome=1"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/index.css" rel="stylesheet" type="text/css">
+    <script src="webjars/jquery/jquery.slim.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script defer src="webjars/font-awesome/js/all.min.js"></script>
+    <script src="assets/js/index.js"></script>
+    <meta content="#0f320c" name="theme-color">
+</head>
+<body dir="rtl">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
+    <a class="navbar-brand IRANSansWeb-Medium" href="">
+        <img alt="Spring System" class="d-inline-block" height="40" src="assets/png/spring_512×512.png" width="40">
+        سامانه اسپرینگ
+    </a>
+    <button aria-controls="spring-navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#spring-navbar" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse IRANSansWeb-Light" id="spring-navbar">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="">
+                    <i class="fas fa-home fa-lg"></i>
+                    صفحه اصلی
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                   href="#" id="navbar-dropdown">
+                    <i class="fas fa-user-circle fa-lg"></i>
+                    حساب کاربری
+                </a>
+                <div aria-labelledby="navbar-dropdown" class="dropdown-menu dropdown-menu-md-right">
+                    <div sec:authorize="isAnonymous()" th:remove="tag">
+                        <a class="dropdown-item" href="/login">
+                            <i class="fas fa-sign-in-alt"></i>
+                            ورود
+                        </a>
+                        <a class="dropdown-item" href="/signup">
+                            <i class="fas fa-user-plus"></i>
+                            ثبت نام
+                        </a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()" th:remove="tag">
+                        <h6 class="dropdown-header IRANSansWeb-Light">اطلاعات کاربری</h6>
+                        <span class="dropdown-item-text text-nowrap">
+                            <i class="fas fa-user"></i>
+                            <span th:utext="|${user.userProfile.firstName} ${user.userProfile.lastName}|"></span>
+                        </span>
+                        <a class="dropdown-item" href="/dashboard">
+                            <i class="fas fa-columns"></i>
+                            داشبورد
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            خروج از سامانه
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main class="flex-shrink-0 mb-5" role="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <div class="card text-white bg-danger mb-sm-3">
+                    <div class="card-header IRANSansWeb-Medium">
+                        <i class="fas fa-bookmark fa-lg"></i> اعلانات اساتید
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card text-white bg-info mb-sm-3">
+                    <div class="card-header IRANSansWeb-Medium">
+                        <i class="fas fa-server fa-lg"></i> اعلانات سیستم
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+                <div class="card text-white bg-success mb-sm-3">
+                    <div class="card-header IRANSansWeb-Medium">
+                        <i class="far fa-chart-bar fa-lg"></i>
+                        آمار سیستم
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <div class="text-center">Made with ❤️ in <a class="text-decoration-none" href="http://bonabu.ac.ir">Bonab
+            University </a>
+            - <span th:remove="tag" th:text="${#dates.format(#dates.createNow(),'YYYY')}"></span>
+            <span class="badge badge-success" data-toggle="tooltip">v0.1.1 BETA</span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

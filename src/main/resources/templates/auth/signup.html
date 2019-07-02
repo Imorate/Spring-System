@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>سامانه اسپرینگ | ثبت نام</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" title="IE=edge,chrome=1"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/signup.css" rel="stylesheet" type="text/css">
+    <script th:src="@{webjars/jquery/jquery.slim.js}"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script defer th:src="@{webjars/font-awesome/js/all.min.js}"></script>
+    <script src="assets/js/bootstrap-form-validation.js"></script>
+    <meta content="#0f320c" name="theme-color">
+</head>
+<body dir="rtl">
+<form class="form-signin card text-white bg-dark needs-validation mb-3" novalidate th:action="@{/signup}"
+      th:method="POST" th:object="${formUser}">
+    <div class="form-group text-center mb-4">
+        <a href="/">
+            <!--suppress CheckImageSize -->
+            <img alt="Spring System" class="img-fluid mb-1" height="128"
+                 src="assets/png/spring_512×512.png" width="128">
+        </a>
+        <h3 class="IRANSansWeb-Medium">ثبت نام در سامانه</h3>
+    </div>
+    <div sec:authorize="isAnonymous()" th:remove="tag">
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label class="IRANSansWeb-Light" for="first-name"> نام</label>
+                    <input autofocus class="form-control IRANSansWeb-Light" id="first-name" max="64"
+                           name="first-name" placeholder="نام" required th:field="*{userProfile.firstName}" type="text">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label class="IRANSansWeb-Light" for="last-name"> نام خانوادگی</label>
+                    <input autofocus class="form-control IRANSansWeb-Light" id="last-name" max="64"
+                           name="last-name" placeholder="نام خانوادگی" required th:field="*{userProfile.lastName}"
+                           type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="username">نام کاربری</label>
+            <input class="form-control" id="username" max="255" name="username"
+                   placeholder="نام کاربری" required th:field="*{username}" type="text">
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+                Error
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="email">ایمیل</label>
+            <input class="form-control" id="email" max="255" name="email" placeholder="ایمیل"
+                   required th:field="*{userProfile.email}" type="email">
+            <small class="form-text text-muted IRANSansWeb-Light">ایمیل شما به هیچ وجه با اشخاص دیگر به
+                اشتراک گذاشته نمی‌شود.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="phone-number">شماره همراه</label>
+            <input class="form-control" id="phone-number" max="255" name="phone-number"
+                   placeholder="شماره همراه" required
+                   th:field="*{userProfile.phoneNumber}" type="tel">
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('userProfile.phoneNumber')}" th:errors="*{userProfile.phoneNumber}">
+                Error
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="student-number">شماره دانشجویی</label>
+            <input class="form-control IRANSansWeb-Light" id="student-number" maxlength="8"
+                   name="student-number" placeholder="شماره دانشجویی"
+                   required size="8" th:field="*{student.studentID}" type="text">
+            <small class="form-text text-muted IRANSansWeb-Light">
+                شماره دانشجویی شما باید ۸ رقم باشد.
+            </small>
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('student.studentID')}" th:errors="*{student.studentID}">
+                Error
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="gender-form-control-select">جنسیت</label>
+            <select class="form-control custom-select IRANSansWeb-Light" id="gender-form-control-select"
+                    required th:field="*{userProfile.gender}">
+                <option selected value="-1">جنسیت</option>
+                <option value="FEMALE">زن</option>
+                <option value="MALE">مرد</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="department-form-control-select">رشته تحصیلی</label>
+            <select class="form-control custom-select IRANSansWeb-Light" id="department-form-control-select"
+                    required th:field="*{student.department}">
+                <option selected value="-1">رشته تحصیلی</option>
+                <option th:each="department : ${departmentList}" th:text="${department.name}"
+                        th:value="${department.id}">
+                    <span th:if="${department.type == 1 or department.type == 3}"
+                          th:remove="tag" th:text="|${department.name} مهندسی|"></span>
+                    <span th:if="${department.type == 2}" th:remove="tag"
+                          th:text="|${department.name} مهندسی|"></span>
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="password">رمز عبور</label>
+            <input class="form-control IRANSansWeb-Light" id="password" max="255" name="password"
+                   placeholder="رمز عبور" required th:field="*{password}" type="password">
+            <small class="form-text text-muted IRANSansWeb-Light">
+                رمز عبور باید بیشتر از ۶ کاراکتر باشد.
+            </small>
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                Error
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="IRANSansWeb-Light" for="retype-password"> تکرار رمز عبور</label>
+            <input class="form-control IRANSansWeb-Light" id="retype-password" max="255"
+                   name="retype-password" placeholder="تکرار رمز عبور" required type="password">
+        </div>
+        <div class="custom-control form-row custom-checkbox mb-3">
+            <input checked class="custom-control-input" id="license-agreement"
+                   name="license-agreement" required type="checkbox">
+            <label class="custom-control-label IRANSansWeb-Light text-white text-decoration-none"
+                   for="license-agreement">تمامی شرایط و ضوابط
+                را
+                قبول دارم
+            </label>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block IRANSansWeb-Medium" type="submit">ثبت نام
+            </button>
+        </div>
+    </div>
+    <p class="mt-3 mb-0 text-muted text-center" dir="ltr"
+       th:text="'&copy;'+${#dates.format(#dates.createNow(),'YYYY')} + ' - Spring System'">
+    </p>
+</form>
+</body>
+</html>
