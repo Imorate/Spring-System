@@ -17,7 +17,7 @@ public class StudentValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Student student = (Student) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "student.studentID", "NotEmpty");
-        if (student.getStudentID() != 8) {
+        if (String.valueOf(student.getStudentID()).length() != 8) {
             errors.rejectValue("student.studentID", "Size.student.studentID");
         }
     }

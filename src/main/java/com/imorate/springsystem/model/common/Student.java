@@ -15,8 +15,6 @@ import javax.persistence.*;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "student_id", length = 8, nullable = false, unique = true)
@@ -24,11 +22,10 @@ public class Student {
 
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
     @MapsId
     private User user;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 

@@ -1,9 +1,12 @@
 package com.imorate.springsystem.model.auth;
 
 import com.imorate.springsystem.model.AuditModel;
+import com.imorate.springsystem.model.announcement.Announcement;
 import com.imorate.springsystem.model.common.Master;
 import com.imorate.springsystem.model.common.Student;
 import lombok.*;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -49,6 +52,7 @@ public class User extends AuditModel {
     private Master master;
 
     @ManyToMany
+    @ToString.Exclude
     private Set<Role> roles;
 
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html lang="fa" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>سامانه اسپرینگ | ثبت نام</title>
@@ -49,7 +49,8 @@
             <label class="IRANSansWeb-Light" for="username">نام کاربری</label>
             <input class="form-control" id="username" max="255" name="username"
                    placeholder="نام کاربری" required th:field="*{username}" type="text">
-            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:errors="*{username}"
+                 th:if="${#fields.hasErrors('username')}">
                 Error
             </div>
         </div>
@@ -63,10 +64,11 @@
         </div>
         <div class="form-group">
             <label class="IRANSansWeb-Light" for="phone-number">شماره همراه</label>
-            <input class="form-control" id="phone-number" max="255" name="phone-number"
+            <input class="form-control" id="phone-number" max="11" name="phone-number"
                    placeholder="شماره همراه" required
                    th:field="*{userProfile.phoneNumber}" type="tel">
-            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('userProfile.phoneNumber')}" th:errors="*{userProfile.phoneNumber}">
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert"
+                 th:errors="*{userProfile.phoneNumber}" th:if="${#fields.hasErrors('userProfile.phoneNumber')}">
                 Error
             </div>
         </div>
@@ -78,7 +80,8 @@
             <small class="form-text text-muted IRANSansWeb-Light">
                 شماره دانشجویی شما باید ۸ رقم باشد.
             </small>
-            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('student.studentID')}" th:errors="*{student.studentID}">
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert"
+                 th:errors="*{student.studentID}" th:if="${#fields.hasErrors('student.studentID')}">
                 Error
             </div>
         </div>
@@ -92,16 +95,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="IRANSansWeb-Light" for="department-form-control-select">رشته تحصیلی</label>
+            <label for="department-form-control-select">رشته تحصیلی</label>
             <select class="form-control custom-select IRANSansWeb-Light" id="department-form-control-select"
                     required th:field="*{student.department}">
-                <option selected value="-1">رشته تحصیلی</option>
-                <option th:each="department : ${departmentList}" th:text="${department.name}"
+                <option th:each="department : ${departmentList}"
+                        th:text="${department.type eq 1}? 'مهندسی '+${department.name}:${department.name}"
                         th:value="${department.id}">
-                    <span th:if="${department.type == 1 or department.type == 3}"
-                          th:remove="tag" th:text="|${department.name} مهندسی|"></span>
-                    <span th:if="${department.type == 2}" th:remove="tag"
-                          th:text="|${department.name} مهندسی|"></span>
                 </option>
             </select>
         </div>
@@ -112,7 +111,8 @@
             <small class="form-text text-muted IRANSansWeb-Light">
                 رمز عبور باید بیشتر از ۶ کاراکتر باشد.
             </small>
-            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+            <div class="alert alert-danger IRANSansWeb-Light mt-2" role="alert" th:errors="*{password}"
+                 th:if="${#fields.hasErrors('password')}">
                 Error
             </div>
         </div>

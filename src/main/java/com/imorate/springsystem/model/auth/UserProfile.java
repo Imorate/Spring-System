@@ -1,7 +1,7 @@
 package com.imorate.springsystem.model.auth;
 
 import com.imorate.springsystem.model.AuditModel;
-import com.imorate.springsystem.model.enumeration.GENDER;
+import com.imorate.springsystem.model.enumeration.Gender;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +19,6 @@ import java.util.Date;
 @Table(name = "user_profile")
 public class UserProfile extends AuditModel implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "first_name", length = 32)
@@ -36,7 +35,7 @@ public class UserProfile extends AuditModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 10)
-    private GENDER gender;
+    private Gender gender;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth")
@@ -46,12 +45,11 @@ public class UserProfile extends AuditModel implements Serializable {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "avatar",unique = true)
+    @Column(name = "avatar", unique = true)
     private String avatar;
 
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(nullable = false)
     @MapsId
     private User user;
 

@@ -1,6 +1,6 @@
 package com.imorate.springsystem.model.enumeration;
 
-public enum COLOR {
+public enum Color {
     PRIMARY,
     SECONDARY,
     SUCCESS,

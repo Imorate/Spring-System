@@ -1,6 +1,6 @@
 package com.imorate.springsystem.model.enumeration;
 
-public enum GENDER {
+public enum Gender {
     MALE,
     FEMALE
 }

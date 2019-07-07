@@ -60,7 +60,7 @@
                         <h6 class="dropdown-header IRANSansWeb-Light">اطلاعات کاربری</h6>
                         <span class="dropdown-item-text text-nowrap">
                             <i class="fas fa-user"></i>
-                            <span th:utext="|${user.userProfile.firstName} ${user.userProfile.lastName}|"></span>
+                            <span th:utext="|${user.firstName} ${user.lastName}|"></span>
                         </span>
                         <a class="dropdown-item" href="/dashboard">
                             <i class="fas fa-columns"></i>
@@ -86,7 +86,22 @@
                         <i class="fas fa-bookmark fa-lg"></i> اعلانات اساتید
                     </div>
                     <div class="card-body">
-
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white"
+                                th:if="${masterAnnouncements.size()} eq 0">
+                                اعلانی جهت نمایش وجود ندارد
+                                <span class="badge badge-pill badge-danger">پیام سامانه</span>
+                            </li>
+                            <li class="list-group-item bg-dark text-white IRANSansWeb-Light"
+                                th:each="announcement: ${masterAnnouncements}"
+                                th:unless="${masterAnnouncements.size()} eq 0">
+                                <span class="badge badge-pill badge-danger"
+                                      th:text="|${announcement.announcement.user.userProfile.firstName} ${announcement.announcement.user.userProfile.lastName}|"></span>
+                                <span th:utext="${announcement.announcement.title}"></span>
+                                <span class="badge badge-pill badge-danger float-right"
+                                      th:text="${@calendarConf.toPersianFormat(announcement.deadline)}"></span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -96,7 +111,20 @@
                         <i class="fas fa-server fa-lg"></i> اعلانات سیستم
                     </div>
                     <div class="card-body">
-
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white IRANSansWeb-Light"
+                                th:if="${systemAnnouncements.size()} eq 0">
+                                اعلانی جهت نمایش وجود ندارد
+                                <span class="badge badge-pill badge-danger">پیام سامانه</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white IRANSansWeb-Light"
+                                th:each="announcement: ${systemAnnouncements}"
+                                th:unless="${systemAnnouncements.size()} eq 0">
+                                <span th:remove="tag" th:utext="${announcement.announcement.title}"></span>
+                                <span class="badge badge-pill badge-danger"
+                                      th:text="${@calendarConf.toPersianFormat(announcement.createdAt)}"></span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="card text-white bg-success mb-sm-3">
@@ -105,7 +133,12 @@
                         آمار سیستم
                     </div>
                     <div class="card-body">
-
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white IRANSansWeb-Light">
+                                کاربران سیستم
+                                <span class="badge badge-secondary badge-pill" th:text="${userCount}">0</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 package com.imorate.springsystem.model.common;
 
 import com.imorate.springsystem.model.auth.User;
-import com.imorate.springsystem.model.enumeration.COLOR;
+import com.imorate.springsystem.model.enumeration.Color;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,8 +17,6 @@ import javax.persistence.*;
 public class Master {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "employee_id", nullable = false, unique = true)
@@ -26,11 +24,10 @@ public class Master {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "fallback_color", nullable = false)
-    private COLOR fallbackColor;
+    private Color fallbackColor;
 
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
     @MapsId
     private User user;
 

@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "role")
-public class Role extends AuditModel implements Serializable {
+public class Role extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +24,6 @@ public class Role extends AuditModel implements Serializable {
     private String role;
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 }

@@ -123,6 +123,11 @@
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
             <version>LATEST</version>
         </dependency>
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>LATEST</version>
+        </dependency>
     </dependencies>
 
     <build>
