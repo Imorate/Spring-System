@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>سامانه اسپرینگ | پروفایل کاربری</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="#0f320c" name="theme-color">
+    <meta content="Spring System Project (SSP) - System Analysis and Design course project" name="description">
+    <meta content="@Imorate" property="twitter:creator">
+    <meta content="website" property="og:type">
+    <meta content="Spring System" property="og:site_name">
+    <meta content="Spring System Project (SSP) - System Analysis and Design course project" property="og:title">
+    <meta content="Spring System Project (SSP) - System Analysis and Design course project" property="og:description">
+    <link rel="stylesheet" th:href="@{/assets/css/dashboard.css}" type="text/css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+</head>
+<body class="app sidebar-mini rtl">
+<header class="app-header"><a class="app-header__logo" href="/dashboard">سامانه اسپرینگ</a>
+    <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
+    <ul class="app-nav">
+        <li class="app-search">
+            <input class="app-search__input" placeholder="جستجو" type="search">
+            <button class="app-search__button"><i class="fa fa-search"></i></button>
+        </li>
+        <li class="dropdown"><a aria-label="Show notifications" class="app-nav__item" data-toggle="dropdown" href="#"><i
+                class="fa fa-bell-o fa-lg"></i></a>
+            <ul class="app-notification dropdown-menu dropdown-menu-right">
+                <li class="app-notification__title">شما 4 اعلان خوانده نشده دارید</li>
+                <div class="app-notification__content">
+                    <li><a class="app-notification__item" href="javascript:"><span class="app-notification__icon"><span
+                            class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i
+                            class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                        <div>
+                            <p class="app-notification__message">Lisa sent you a mail</p>
+                            <p class="app-notification__meta">2 min ago</p>
+                        </div>
+                    </a></li>
+                    <li><a class="app-notification__item" href="javascript:"><span class="app-notification__icon"><span
+                            class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i
+                            class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                        <div>
+                            <p class="app-notification__message">Mail server not working</p>
+                            <p class="app-notification__meta">5 min ago</p>
+                        </div>
+                    </a></li>
+                    <li><a class="app-notification__item" href="javascript:"><span class="app-notification__icon"><span
+                            class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i
+                            class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                        <div>
+                            <p class="app-notification__message">Transaction complete</p>
+                            <p class="app-notification__meta">2 days ago</p>
+                        </div>
+                    </a></li>
+                    <div class="app-notification__content">
+                        <li><a class="app-notification__item" href="javascript:"><span
+                                class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                class="fa fa-circle fa-stack-2x text-primary"></i><i
+                                class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">Lisa sent you a mail</p>
+                                <p class="app-notification__meta">2 min ago</p>
+                            </div>
+                        </a></li>
+                        <li><a class="app-notification__item" href="javascript:"><span
+                                class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                class="fa fa-circle fa-stack-2x text-danger"></i><i
+                                class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">Mail server not working</p>
+                                <p class="app-notification__meta">5 min ago</p>
+                            </div>
+                        </a></li>
+                        <li><a class="app-notification__item" href="javascript:"><span
+                                class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                class="fa fa-circle fa-stack-2x text-success"></i><i
+                                class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">Transaction complete</p>
+                                <p class="app-notification__meta">2 days ago</p>
+                            </div>
+                        </a></li>
+                    </div>
+                </div>
+                <li class="app-notification__footer"><a href="#">مشاهده تمامی اعلانات</a></li>
+            </ul>
+        </li>
+        <li class="dropdown"><a aria-label="Open Profile Menu" class="app-nav__item" data-toggle="dropdown" href="#"><i
+                class="fa fa-user fa-lg"></i></a>
+            <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                <li><a class="dropdown-item" href="/dashboard/user-profile"><i class="fa fa-user fa-lg"></i>پروفایل
+                    کاربری</a></li>
+                <li><a class="dropdown-item" href="/settings"><i class="fa fa-cog fa-lg"></i>تنظیمات</a></li>
+                <li><a class="dropdown-item" href="/logout"><i class="fa fa-sign-out fa-lg"></i>خروج از سیستم</a></li>
+            </ul>
+        </li>
+    </ul>
+</header>
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+    <a class="app-sidebar__user text-decoration-none" href="/dashboard/user-profile">
+        <img alt="User Avatar" class="app-sidebar__user-avatar" height="50" sec:authorize="hasRole('ROLE_STUDENT')"
+             src="/assets/png/default.jpg"
+             th:src="${userProfile.avatar}?${'/assets/avatar/student/'+ userProfile.avatar}:'/assets/png/default.jpg'"
+             width="50">
+        <img alt="User Avatar" class="app-sidebar__user-avatar" height="50" sec:authorize="hasRole('ROLE_MASTER')"
+             src="/assets/png/default.jpg"
+             th:src="${userProfile.avatar}?${'/assets/avatar/teacher/'+ userProfile.avatar}:'/assets/png/default.jpg'"
+             width="50">
+        <div>
+            <p class="app-sidebar__user-name" th:text="|${userProfile.firstName} ${userProfile.lastName}|">
+                Full Name</p>
+            <p class="app-sidebar__user-designation" sec:authorize="hasRole('ROLE_STUDENT')">دانشجو</p>
+            <p class="app-sidebar__user-designation" sec:authorize="hasRole('ROLE_MASTER')">استاد</p>
+        </div>
+    </a>
+    <ul class="app-menu">
+        <li>
+            <a class="app-menu__item" href="/dashboard"><i class="app-menu__icon fa fa-dashboard">
+            </i><span class="app-menu__label">داشبورد</span></a>
+        </li>
+        <li>
+            <a class="app-menu__item active" href="#"><i class="app-menu__icon fa fa-user fa-lg">
+            </i><span class="app-menu__label">پروفایل کاربری</span></a>
+        </li>
+        <li sec:authorize="hasRole('ROLE_MASTER')">
+            <a class="app-menu__item" href="/dashboard/announcement"><i class="app-menu__icon fa fa-bullhorn fa-lg">
+            </i><span class="app-menu__label">اعلانات صفحه اصلی</span></a>
+        </li>
+        <li class="treeview"><a class="app-menu__item" data-toggle="treeview" href="#"><i
+                class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">UI Elements</span><i
+                class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i>
+                    Bootstrap Elements</a></li>
+                <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" rel="noopener"
+                       target="_blank"><i class="icon fa fa-circle-o"></i> Font Icons</a></li>
+                <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
+                <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
+            </ul>
+        </li>
+        <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span
+                class="app-menu__label">Charts</span></a></li>
+        <li class="treeview"><a class="app-menu__item" data-toggle="treeview" href="#"><i
+                class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i
+                class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
+                    Components</a></li>
+                <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
+                    Components</a></li>
+                <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form
+                    Samples</a></li>
+                <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
+                    Notifications</a></li>
+            </ul>
+        </li>
+        <li class="treeview"><a class="app-menu__item" data-toggle="treeview" href="#"><i
+                class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i
+                class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic
+                    Tables</a></li>
+                <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data
+                    Tables</a></li>
+            </ul>
+        </li>
+        <li class="treeview"><a class="app-menu__item" data-toggle="treeview" href="#"><i
+                class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i
+                class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Blank Page</a>
+                </li>
+                <li><a class="treeview-item" href="page-login.html"><i class="icon fa fa-circle-o"></i> Login Page</a>
+                </li>
+                <li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen
+                    Page</a></li>
+                <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a>
+                </li>
+                <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice
+                    Page</a></li>
+                <li><a class="treeview-item" href="page-calendar.html"><i class="icon fa fa-circle-o"></i> Calendar Page</a>
+                </li>
+                <li><a class="treeview-item" href="page-mailbox.html"><i class="icon fa fa-circle-o"></i> Mailbox</a>
+                </li>
+                <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+<main class="app-content">
+    <div class="row user">
+        <div class="col-md-12">
+            <div class="profile">
+                <div class="info">
+                    <img alt="User Avatar" class="user-img" sec:authorize="hasRole('ROLE_STUDENT')"
+                         src="/assets/png/default.jpg"
+                         th:src="${userProfile.avatar}?${'/assets/avatar/student/'+ userProfile.avatar}:'/assets/png/default.jpg'">
+                    <img alt="User Avatar" class="user-img" sec:authorize="hasRole('ROLE_MASTER')"
+                         src="/assets/png/default.jpg"
+                         th:src="${userProfile.avatar}?${'/assets/avatar/teacher/'+ userProfile.avatar}:'/assets/png/default.jpg'">
+                    <h4 th:text="|${userProfile.firstName} ${userProfile.lastName}|">Full Name</h4>
+                    <p sec:authorize="hasRole('ROLE_STUDENT')">دانشجو</p>
+                    <p sec:authorize="hasRole('ROLE_MASTER')">استاد</p>
+                    <p class="persian-numeric" sec:authorize="hasRole('ROLE_STUDENT')"
+                       th:text="${userProfile.user.student.studentID}">
+                        Student ID</p>
+                    <p class="persian-numeric" sec:authorize="hasRole('ROLE_MASTER')"
+                       th:text="${userProfile.user.master.employeeID}">
+                        Employee ID</p>
+                </div>
+                <div class="cover-image"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="tile p-0">
+                <ul class="nav flex-column nav-tabs user-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#view-profile">پروفایل کاربری</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-settings">تنظیمات پروفایل
+                        کاربری</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="view-profile" role="tabpanel">
+                    <div class="tile profile-settings">
+                        <h4 class="line-head">مشاهده پروفایل کاربری</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">آواتار</div>
+                                    <img alt="User Avatar" class="user-img" sec:authorize="hasRole('ROLE_STUDENT')"
+                                         src="/assets/png/default.jpg"
+                                         th:src="${userProfile.avatar}?${'/assets/avatar/student/'+ userProfile.avatar}:'/assets/png/default.jpg'">
+                                    <img alt="User Avatar" class="user-img" sec:authorize="hasRole('ROLE_MASTER')"
+                                         src="/assets/png/default.jpg"
+                                         th:src="${userProfile.avatar}?${'/assets/avatar/teacher/'+ userProfile.avatar}:'/assets/png/default.jpg'">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">نام</div>
+                                    <div class="col-sm-7" th:text="${userProfile.firstName}">First Name</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">نام خانوادگی</div>
+                                    <div class="col-sm-7" th:text="${userProfile.lastName}">Last Name</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">نام کاربری</div>
+                                    <div class="col-sm-7" th:text="${userProfile.user.username}">Username</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">نوع اکانت کاربری</div>
+                                    <div class="col-sm-7" sec:authorize="hasRole('ROLE_STUDENT')">دانشجو</div>
+                                    <div class="col-sm-7" sec:authorize="hasRole('ROLE_MASTER')">استاد</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">ایمیل</div>
+                                    <div class="col-sm-7" th:text="${userProfile.email}">Email</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">جنسیت</div>
+                                    <div class="col-sm-7"
+                                         th:text="${userProfile.gender eq userProfile.gender.MALE}?'مذکر':'مؤنث'">Gender
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">شهر</div>
+                                    <div class="col-sm-7" th:text="${userProfile.city}?:'تنظیم نشده'">City</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">تاریخ تولد</div>
+                                    <div class="col-sm-7 persian-numeric"
+                                         th:text="${userProfile.dateOfBirth}?:'تنظیم نشده'">Date of
+                                        birth
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold">شماره همراه</div>
+                                    <div class="col-sm-7 persian-numeric" th:text="${userProfile.phoneNumber}">Phone
+                                        Number
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold" sec:authorize="hasRole('ROLE_STUDENT')">شماره دانشجویی</div>
+                                    <div class="col-sm-7 persian-numeric" sec:authorize="hasRole('ROLE_STUDENT')"
+                                         th:text="${userProfile.user.student.studentID}">Student ID
+                                    </div>
+                                    <div class="col-sm-5 font-weight-bold" sec:authorize="hasRole('ROLE_MASTER')">کد پرسنلی</div>
+                                    <div class="col-sm-7 persian-numeric" sec:authorize="hasRole('ROLE_MASTER')"
+                                         th:text="${userProfile.user.master.employeeID}">Employee ID
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-5 font-weight-bold" sec:authorize="hasRole('ROLE_STUDENT')">رشته تحصیلی</div>
+                                    <div class="col-sm-7" th:text="${userDepartment.get().name}" sec:authorize="hasRole('ROLE_STUDENT')">Field of study</div>
+                                    <div class="col-sm-5 font-weight-bold" sec:authorize="hasRole('ROLE_MASTER')">دپارتمان</div>
+                                    <div class="col-sm-7" th:text="${userDepartment.get().name}" sec:authorize="hasRole('MASTER')">Department</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile-settings" role="tabpanel">
+                    <div class="tile profile-settings">
+                        <h4 class="line-head">تنظیمات پروفایل کاربری</h4>
+                        <form class="col-md-8" th:action="@{/dashboard/user-profile/edit-profile}" th:method="POST"
+                              th:object="${formUser}">
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="first-name"> نام</label>
+                                        <input autofocus class="form-control" id="first-name" max="64"
+                                               name="first-name" placeholder="نام" required
+                                               th:field="*{userProfile.firstName}"
+                                               th:value="${userProfile.firstName}" type="text">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="last-name"> نام خانوادگی</label>
+                                        <input autofocus class="form-control" id="last-name" max="64"
+                                               name="last-name" placeholder="نام خانوادگی"
+                                               th:field="*{userProfile.lastName}"
+                                               th:value="${userProfile.lastName}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">نام کاربری</label>
+                                <input class="form-control" id="username" name="username" readonly
+                                       required th:placeholder="${userProfile.user.username}" type="text">
+                                <small class="form-text text-muted">
+                                    نام کاربری قابل تغییر نمی باشد.
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">ایمیل</label>
+                                <input class="form-control" id="email" name="email" placeholder="ایمیل"
+                                       th:field="*{userProfile.email}" th:value="${userProfile.email}" type="email">
+                            </div>
+                            <div class="form-group" sec:authorize="hasRole('ROLE_STUDENT')">
+                                <label for="student-number">شماره دانشجویی</label>
+                                <input class="form-control" id="student-number" maxlength="8" name="student-number"
+                                       placeholder="شماره دانشجویی" readonly size="8"
+                                       th:value="${userProfile.user.student.studentID}" type="text">
+                                <small class="form-text text-muted">
+                                    شماره دانشجویی قابل تغییر نمی باشد.
+                                </small>
+                            </div>
+                            <div class="form-group" sec:authorize="hasRole('ROLE_MASTER')">
+                                <label for="employee-number">شماره پرسنلی</label>
+                                <input class="form-control" id="employee-number" maxlength="8" name="employee-number"
+                                       placeholder="شماره پرسنلی" readonly size="8"
+                                       th:value="${userProfile.user.master.employeeID}" type="text">
+                                <small class="form-text text-muted">
+                                    شماره پرسنلی قابل تغییر نمی باشد.
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender-form-control-select">جنسیت</label>
+                                <select class="form-control custom-select" id="gender-form-control-select"
+                                        th:field="*{userProfile.gender}">
+                                    <option th:selected="${userProfile.gender.FEMALE}" value="FEMALE">مؤنث</option>
+                                    <option th:selected="${userProfile.gender.MALE}" value="MALE">مذکر</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="department-form-control-select">رشته تحصیلی</label>
+                                <select class="form-control custom-select" id="department-form-control-select"
+                                        th:field="*{userProfile.user.student.department}">
+                                    <option th:each="department : ${departmentList}"
+                                            th:selected="${userDepartment.get().id} == ${department.id}"
+                                            th:text="${department.type eq 1}? 'مهندسی '+${department.name}:${department.name}"
+                                            th:value="${department.id}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">شماره همراه</label>
+                                <input class="form-control" id="phone-number" max="11" name="phone-number"
+                                       placeholder="شماره همراه" th:field="*{userProfile.phoneNumber}"
+                                       th:value="${userProfile.phoneNumber}"
+                                       type="tel">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">شهر</label>
+                                <input class="form-control" id="city" name="city"
+                                       placeholder="شهر" th:field="*{userProfile.city}" th:value="${userProfile.city}"
+                                       type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="date-of-birth">تاریخ تولد</label>
+                                <input class="form-control" id="date-of-birth" name="dateOfBirth"
+                                       placeholder="تاریخ تولد" th:field="*{userProfile.dateOfBirth}"
+                                       th:value="${userProfile.dateOfBirth}"
+                                       type="text">
+                            </div>
+                            <div class="tile-footer">
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">تغییر پروفایل کاربری
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script th:src="@{/webjars/jquery/jquery.js}"></script>
+<script th:src="@{/assets/js/persian-numeric.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/dashboard.js}"></script>
+<script th:src="@{/assets/js/plugins/pace.min.js}"></script>
+<script th:src="@{/assets/js/plugins/persianumber.min.js}"></script>
+<script th:src="@{/assets/js/plugins/bootstrap-datepicker.min.js}"></script>
+<script type="text/javascript">
+    $('#date-of-birth').datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 6,
+        title: "تاریخ تولد"
+    });
+</script>
+</body>
+</html>
